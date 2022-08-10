@@ -22,6 +22,7 @@ Requirements:
 
 STILL TO DO (based on small # of user testing)
 
+- From professor: I didn't see your input validation or the try/except block to provide connection status messaging to the user.
 - Be more explicit in user prompts
 - Put somewhere in prompts that these are US cities only (Paris, TX, not Paris, France)
 - Put a cool box around the weather output
