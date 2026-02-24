@@ -22,11 +22,15 @@ Requirements:
 """
 
 from time import sleep
+import os
 import requests # importing the requests library
 
 def get_web_data(zip=None, city=None): # function to call website and fetch data
     baseUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial" 
-    apikey = "4acfc90510c428d87cef423f37188e19" # here is the API key
+    apikey = os.environ.get("OPENWEATHER_API_KEY") # API key from environment variable
+    if not apikey:
+        print("Error: OPENWEATHER_API_KEY environment variable is not set.")
+        return None
 
     if zip is not None: 
         baseUrl += "&zip="+str(zip)+",us" # "US" to select American cities
@@ -71,19 +75,21 @@ def main():
 
                 zipCode = int(input("Enter the zip code of the area: "))
                 resp = get_web_data(zipCode, None) # Get data
-                display(resp) # Display response
+                if resp:
+                    display(resp) # Display response
 
             except Exception as ex:
 
                 print("Error: ", ex)
-                    
+
         elif choice == 2: # City name block
 
             try:
 
                 cityName = input("Enter the city name: ")
                 resp = get_web_data(None, cityName) # Get data
-                display(resp) # Display response
+                if resp:
+                    display(resp) # Display response
 
             except Exception as ex:
                 
